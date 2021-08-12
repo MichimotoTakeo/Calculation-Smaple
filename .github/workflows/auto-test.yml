@@ -1,0 +1,22 @@
+name: Auto test
+
+on: push
+
+jobs:
+  build:
+    runs-on: windows-2019
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Add nuget to PATH
+        uses: nuget/setup-nuget@v1
+        with:
+          nuget-api-key: ${{ secrets.NuGetAPIKey }}
+          nuget-version: 'latest'
+      - run: nuget restore Calculation-Smaple.sln
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.0.2
+
+      - run: dotnet build Calculation-Smaple.sln --configuration Release
+      - run: dotnet test CalculationTest/bin/Release/CalculationTest.dll
