@@ -19,4 +19,4 @@ jobs:
         uses: microsoft/setup-msbuild@v1.0.2
 
       - run: dotnet build Calculation-Smaple.sln --configuration Release
-      - run: dotnet test CalculationTest/bin/Release/Calculation-Smaple.dll
+      - run: dotnet test CalculationTest/bin/Release/CalculationTest.dll
